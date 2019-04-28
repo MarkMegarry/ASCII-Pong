@@ -140,28 +140,28 @@ void main(void){
                         			}
 					}
 				break;
-				case 4: //Ball moving diagonally up right
-				 move(Ball.ypos, Ball.xpos);
-                        printw("%c", 32);
-                        Ball.xpos++;
-                        Ball.ypos--;
-                        move(Ball.ypos, Ball.xpos);
-                        if(!(Ball.xpos==Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+4) && Ball.ypos >  1){ //Ball does not touch paddle or ceiling
-                                printw("#");
-				refresh();
-                                before = clock();
-                        }
-			else{
-                        	if(Ball.ypos <= 1){ //Ball touches ceiling
-                                	Ball.direction = 5;
-                                	beep();
-                        	}
-                        	if(Ball.xpos==Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+4){ //Ball touches paddle
-                                	Ball.direction = 2;
-					Ball.xpos--;
-                                	beep();
-                        	}
-			}
+					case 4: //Ball moving diagonally up right
+					move(Ball.ypos, Ball.xpos);
+                        		printw("%c", 32);
+                        		Ball.xpos++;
+                        		Ball.ypos--;
+                        		move(Ball.ypos, Ball.xpos);
+                        		if(!(Ball.xpos==Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+4) && Ball.ypos >  1){ //Ball does not touch paddle or ceiling
+                                		printw("#");
+						refresh();
+                                		before = clock();
+                        		}
+					else{
+                        			if(Ball.ypos <= 1){ //Ball touches ceiling
+                                			Ball.direction = 5;
+                                			beep();
+                        			}
+                        			if(Ball.xpos==Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+4){ //Ball touches paddle
+                                			Ball.direction = 2;
+							Ball.xpos--;
+                                			beep();
+                        			}
+					}
 				break;
 				case 5: //Diagonally down right
 					move(Ball.ypos, Ball.xpos);
