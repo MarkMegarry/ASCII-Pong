@@ -15,13 +15,17 @@ struct Player{
 struct Ball{
 	int ypos;
 	int xpos;
+	int xmodifier;
+	int ymodifier;
 	int direction; //0 = straight right, 1 = straight left, 2 = <^, 3 = <v, 4 = ^>, 5 = v>
-} Ball = {10,5,0};
+} Ball = {10,5,0,0,0};
 
 //Set the home of each player
 void setPlayerHomes();
 //Draw each player
 void drawPlayers();
+//Genrate and assign modifier values
+void generateModifiers();
 void main(void){
 	//Set up ncurses
 	cbreak();
@@ -64,9 +68,10 @@ void main(void){
 		}
 		//Move ball
 		int difference = clock() - before;
+		/*if(difference > speed/8){
+			refresh();
+		}*/ //Uncomment to increase smoothness
 		if(difference > speed){
-			int xmodifier = (rand() % 2) + 1; //Generate movement modifier
-			int ymodifier = (rand()%2) + 1;
 			switch(Ball.direction){
 				case 0: //Left to right
 					move(Ball.ypos, Ball.xpos);
@@ -75,6 +80,7 @@ void main(void){
                         		//Does ball touch paddle?
                         		if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight - 1){
                                 		beep();
+						generateModifiers();
                                 		Ball.direction = 2;
                                 		Ball.xpos--;
                         		}
@@ -102,58 +108,62 @@ void main(void){
 				case 2: //Diagonally up left
 					move(Ball.ypos, Ball.xpos);
                         		printw("%c", 32);
-                        		Ball.xpos-=xmodifier;
-                        		Ball.ypos-=ymodifier;
+                        		Ball.xpos-=Ball.xmodifier;
+                        		Ball.ypos-=Ball.ymodifier;
                         		move(Ball.ypos, Ball.xpos);
-                        		if(Ball.xpos > xmodifier && Ball.ypos > ymodifier){ //Ball does not touch wall or ceiling
+                        		if(Ball.xpos > Ball.xmodifier && Ball.ypos > Ball.ymodifier){ //Ball does not touch wall or ceiling
                                 		printw("#");
 						refresh();
                                 		before = clock();
                         		}
 					else{
-                        			if(Ball.ypos <= ymodifier){ //Ball touches ceiling
+                        			if(Ball.ypos <= Ball.ymodifier){ //Ball touches ceiling
 							Ball.ypos = 1;
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
+							generateModifiers();
                                 			Ball.direction = 3;
                                 			beep();
                         			}
-                        			if(Ball.xpos <= xmodifier){ //Ball touches wall
+                        			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos =1;
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
+							generateModifiers();
                                 			Ball.direction = 4;
-                               				 beep();
+                               				beep();
                         			}
 					}
 				break;
 				case 3: //Diagonally down left
 					move(Ball.ypos, Ball.xpos);
                         		printw("%c", 32);
-                       			 Ball.xpos-= xmodifier;
-                        		Ball.ypos+= ymodifier;
+                       			 Ball.xpos-= Ball.xmodifier;
+                        		Ball.ypos+= Ball.ymodifier;
                         		move(Ball.ypos, Ball.xpos);
-                        		if(Ball.xpos > xmodifier && Ball.ypos <=  maxy - ymodifier - 1){ //Ball does not touch wall or floor
+                        		if(Ball.xpos > Ball.xmodifier && Ball.ypos <=  maxy - Ball.ymodifier - 1){ //Ball does not touch wall or floor
                                 		printw("#");
 						refresh();
                                 		before = clock();
                         		}
 					else{
-                        			if(Ball.ypos > maxy- ymodifier - 1){ //Ball touches floor
+                        			if(Ball.ypos > maxy- Ball.ymodifier - 1){ //Ball touches floor
 							Ball.ypos = maxy - 2;
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
+							generateModifiers();
                                 			Ball.direction = 2;
                                 			beep();
                         			}
-                        			if(Ball.xpos <= xmodifier){ //Ball touches wall
+                        			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos = 1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
 							refresh();
+							generateModifiers();
                                 			Ball.direction = 5;
                                 			beep();
                         			}
@@ -162,20 +172,21 @@ void main(void){
 					case 4: //Ball moving diagonally up right
 					move(Ball.ypos, Ball.xpos);
                         		printw("%c", 32);
-                        		Ball.xpos+= xmodifier;
-                        		Ball.ypos-= ymodifier;
+                        		Ball.xpos+= Ball.xmodifier;
+                        		Ball.ypos-= Ball.ymodifier;
                         		move(Ball.ypos, Ball.xpos);
-                        		if(!(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1) && Ball.ypos >  ymodifier){ //Ball does not touch paddle or ceiling
+                        		if(!(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1) && Ball.ypos >  Ball.ymodifier){ //Ball does not touch paddle or ceiling
                                 		printw("#");
 						refresh();
                                 		before = clock();
                         		}
 					else{
-                        			if(Ball.ypos <= ymodifier){ //Ball touches ceiling
+                        			if(Ball.ypos <= Ball.ymodifier){ //Ball touches ceiling
 							Ball.ypos = 1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
 							refresh();
+							generateModifiers();
                                 			Ball.direction = 5;
                                 			beep();
                         			}
@@ -184,6 +195,7 @@ void main(void){
 							Ball.xpos=Player.home[1] - 1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
+							generateModifiers();
 							refresh();
                                 			beep();
                         			}
@@ -192,10 +204,10 @@ void main(void){
 				case 5: //Diagonally down right
 					move(Ball.ypos, Ball.xpos);
 					printw("%c", 32);
-					Ball.xpos+= xmodifier;
-					Ball.ypos+= ymodifier;
+					Ball.xpos+= Ball.xmodifier;
+					Ball.ypos+= Ball.ymodifier;
 					move(Ball.ypos, Ball.xpos);
-					if(Ball.ypos<=maxy-ymodifier-1&& !(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1)){ //Ball does not touch paddle or floor
+					if(Ball.ypos<=maxy-Ball.ymodifier-1&& !(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1)){ //Ball does not touch paddle or floor
 						printw("#");
 						refresh();
 						before = clock();
@@ -239,5 +251,9 @@ void drawPlayers(){
 	move(Player.home[0], Player.home[1]);
 	vline('[', playerHeight);
 	Player.ypos = Player.home[0]; //Store player 2's ypos
+}
+void generateModifiers(){
+	Ball.xmodifier = (rand()%3) + 1;
+	Ball.ymodifier = (rand()%3) + 1;
 }
 
