@@ -120,7 +120,6 @@ void main(void){
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
-							generateModifiers();
                                 			Ball.direction = 3;
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
@@ -128,7 +127,6 @@ void main(void){
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
-							generateModifiers();
                                 			Ball.direction = 4;
                         			}
 					}
@@ -150,7 +148,6 @@ void main(void){
 							move(Ball.ypos, Ball.xpos);
 							printw("#");
 							refresh();
-							generateModifiers();
                                 			Ball.direction = 2;
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
@@ -158,7 +155,6 @@ void main(void){
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
 							refresh();
-							generateModifiers();
                                 			Ball.direction = 5;
                         			}
 					}
@@ -180,7 +176,6 @@ void main(void){
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
 							refresh();
-							generateModifiers();
                                 			Ball.direction = 5;
                         			}
                         			if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1){ //Ball touches paddle
@@ -216,6 +211,7 @@ void main(void){
 							Ball.xpos = Player.home[1]-1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
+							generateModifiers();
 							refresh();
 							Ball.direction = 2;
 						}
