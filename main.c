@@ -79,7 +79,6 @@ void main(void){
                         		Ball.xpos++;
                         		//Does ball touch paddle?
                         		if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight - 1){
-                                		beep();
 						generateModifiers();
                                 		Ball.direction = 2;
                                 		Ball.xpos--;
@@ -102,7 +101,6 @@ void main(void){
                         		}
                         		else if(Ball.xpos <= 1){ //Yes
                                 		Ball.direction = 0;
-                                		beep();
                         		}
 				break;
 				case 2: //Diagonally up left
@@ -124,7 +122,6 @@ void main(void){
 							refresh();
 							generateModifiers();
                                 			Ball.direction = 3;
-                                			beep();
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos =1;
@@ -133,7 +130,6 @@ void main(void){
 							refresh();
 							generateModifiers();
                                 			Ball.direction = 4;
-                               				beep();
                         			}
 					}
 				break;
@@ -156,7 +152,6 @@ void main(void){
 							refresh();
 							generateModifiers();
                                 			Ball.direction = 2;
-                                			beep();
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos = 1;
@@ -165,7 +160,6 @@ void main(void){
 							refresh();
 							generateModifiers();
                                 			Ball.direction = 5;
-                                			beep();
                         			}
 					}
 				break;
@@ -188,7 +182,6 @@ void main(void){
 							refresh();
 							generateModifiers();
                                 			Ball.direction = 5;
-                                			beep();
                         			}
                         			if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1){ //Ball touches paddle
                                 			Ball.direction = 2;
@@ -197,7 +190,6 @@ void main(void){
                                                         printw("#");
 							generateModifiers();
 							refresh();
-                                			beep();
                         			}
 					}
 				break;
@@ -219,7 +211,6 @@ void main(void){
                                                         printw("#");
 							refresh();
 							Ball.direction = 4;
-							beep();
 						}
 						if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1){ //Ball touches paddle
 							Ball.xpos = Player.home[1]-1;
@@ -227,7 +218,6 @@ void main(void){
                                                         printw("#");
 							refresh();
 							Ball.direction = 2;
-							beep();
 						}
 					}
 				break;
