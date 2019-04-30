@@ -121,6 +121,7 @@ void main(void){
 							printw("#");
 							refresh();
                                 			Ball.direction = 3;
+							before = clock();
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos =1;
@@ -128,6 +129,7 @@ void main(void){
 							printw("#");
 							refresh();
                                 			Ball.direction = 4;
+							before = clock();
                         			}
 					}
 				break;
@@ -149,6 +151,7 @@ void main(void){
 							printw("#");
 							refresh();
                                 			Ball.direction = 2;
+							before = clock();
                         			}
                         			if(Ball.xpos <= Ball.xmodifier){ //Ball touches wall
 							Ball.xpos = 1;
@@ -156,6 +159,7 @@ void main(void){
                                                         printw("#");
 							refresh();
                                 			Ball.direction = 5;
+							before = clock();
                         			}
 					}
 				break;
@@ -177,6 +181,7 @@ void main(void){
                                                         printw("#");
 							refresh();
                                 			Ball.direction = 5;
+							before = clock();;
                         			}
                         			if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1){ //Ball touches paddle
                                 			Ball.direction = 2;
@@ -185,6 +190,7 @@ void main(void){
                                                         printw("#");
 							generateModifiers();
 							refresh();
+							before = clock();
                         			}
 					}
 				break;
@@ -206,6 +212,7 @@ void main(void){
                                                         printw("#");
 							refresh();
 							Ball.direction = 4;
+							before = clock();
 						}
 						if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight-1){ //Ball touches paddle
 							Ball.xpos = Player.home[1]-1;
@@ -214,6 +221,7 @@ void main(void){
 							generateModifiers();
 							refresh();
 							Ball.direction = 2;
+							before = clock();
 						}
 					}
 				break;
