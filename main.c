@@ -29,15 +29,15 @@ void generateModifiers();
 void main(void){
 	//Set up ncurses
 	cbreak();
-	use_env(TRUE);
-	initscr();
-	nodelay(stdscr, TRUE);
-	noecho();
-	curs_set(0);
-	keypad(stdscr, TRUE);
+	use_env(TRUE); //Use environment variables
+	initscr(); //Initialise stdscr
+	nodelay(stdscr, TRUE); //stdscr will not wait for inputs
+	noecho(); //Inputs will not be echoed
+	curs_set(0); //Cursor is hidded
+	keypad(stdscr, TRUE); //Keypad enabled
 	//Get screen size
 	int maxx, maxy;
-	getmaxyx(stdscr, maxy, maxx);
+	getmaxyx(stdscr, maxy, maxx); //Get dimensions of stdscr
 	wborder(stdscr, '|', '|', '=','=','+','+','+','+'); //Draw border
 	playerHeight = maxy/4; //Set player height
 	setPlayerHomes();
