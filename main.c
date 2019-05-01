@@ -33,7 +33,7 @@ void main(void){
 	initscr(); //Initialise stdscr
 	nodelay(stdscr, TRUE); //stdscr will not wait for inputs
 	noecho(); //Inputs will not be echoed
-	curs_set(0); //Cursor is hidded
+	curs_set(0); //Cursor is hidden
 	keypad(stdscr, TRUE); //Keypad enabled
 	//Get screen size
 	int maxx, maxy;
