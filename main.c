@@ -75,19 +75,21 @@ void main(void){
 			switch(Ball.direction){
 				case 0: //Left to right
 					move(Ball.ypos, Ball.xpos);
-                       			 printw("%c", 32);
+                       			printw("%c", 32);
                         		Ball.xpos++;
                         		//Does ball touch paddle?
-                        		if(Ball.xpos>=Player.home[1]-1&&Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight - 1){
-						generateModifiers();
+                        		if(Ball.xpos<Player.home[1] - 1){
+                        		    printw("#");
+                        		    before = clock();
+                        		}
+                        		   
+                        		  
+                        		else if(Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight - 1){
+						                generateModifiers();
                                 		Ball.direction = 2;
                                 		Ball.xpos--;
                         		}
 
-                       			 else {
-                                		printw("#");
-                                		before = clock();
-                        		}
 				break;
 				case 1: //Right to left
                        			 move(Ball.ypos, Ball.xpos);
@@ -247,7 +249,7 @@ void drawPlayers(){
 	Player.ypos = Player.home[0]; //Store player 2's ypos
 }
 void generateModifiers(){
-	Ball.xmodifier = (rand()%3) + 1;
-	Ball.ymodifier = (rand()%3) + 1;
+	Ball.xmodifier = (rand() % (2)) + 1;
+	Ball.ymodifier = (rand() % (2)) + 1;
 }
 
