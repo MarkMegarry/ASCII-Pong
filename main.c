@@ -192,8 +192,8 @@ void main(void){
 							Ball.xpos=Player.home[1] - 1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
-							generateModifiers();
 							refresh();
+							generateModifiers();
 							before = clock();
                         			}
 					}
@@ -222,9 +222,9 @@ void main(void){
 							Ball.xpos = Player.home[1]-1;
 							move(Ball.ypos, Ball.xpos);
                                                         printw("#");
-							generateModifiers();
 							refresh();
-							Ball.direction = 2;
+							generateModifiers();
+							Ball.direction = 3;
 							before = clock();
 						}
 					}
