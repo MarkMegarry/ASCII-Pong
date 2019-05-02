@@ -24,7 +24,7 @@ struct Ball{
 void setPlayerHomes();
 //Draw each player
 void drawPlayers();
-//Genrate and assign modifier values
+//Generate and assign modifiers
 void generateModifiers();
 void main(void){
 	//Set up ncurses
@@ -41,6 +41,7 @@ void main(void){
 	wborder(stdscr, '|', '|', '=','=','+','+','+','+'); //Draw border
 	playerHeight = maxy/4; //Set player height
 	setPlayerHomes();
+	generateModifiers(); //Generate and assign modifiers
 	drawPlayers();
 	refresh();
 	//Seed RNG
@@ -76,16 +77,17 @@ void main(void){
 				case 0: //Left to right
 					move(Ball.ypos, Ball.xpos);
                        			printw("%c", 32);
-                        		Ball.xpos++;
+                        		Ball.xpos += Ball.xmodifier;
+					move(Ball.ypos, Ball.xpos);
                         		//Does ball touch paddle?
                         		if(Ball.xpos<Player.home[1] - 1){
-                        		    printw("#");
-                        		    before = clock();
+                        		   	printw("#");
+						refresh();
+                        		    	before = clock();
                         		}
-                        		   
-                        		  
+
                         		else if(Ball.ypos>=Player.ypos&&Ball.ypos<=Player.ypos+playerHeight - 1){
-						                generateModifiers();
+						generateModifiers();
                                 		Ball.direction = 2;
                                 		Ball.xpos--;
                         		}
