@@ -1,5 +1,5 @@
 # ASCII-Pong
-Very basic game of Pong for Linux terminals.
+(UNFINISHED) A very basic game of Pong for Linux terminals. The game breaks if the player misses the ball.
 
 Utilises the ncurses library.
 
